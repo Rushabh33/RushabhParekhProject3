@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Snake</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <style>
+    canvas {
+        background-color: rgb(94, 136, 150);
+        display: block;
+        margin: 0 auto;
+        border: 1px solid black;
+        max-width: 100%;
+    }
+
+    .keys {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-top: 5%;
+        font-size: 3rem;
+    }
+
+    .arr {
+        margin-right: 3%;
+    }
+    
+    </style>
+</head>
+<body>
+    
+<canvas id="myCanvas" width="480" height="320" ></canvas>
+
+
+<div class="keys">
+    <div class="up arr"><i class="fa fa-arrow-up"></i></div>
+    <div class="left arr"><i class="fa fa-arrow-left"></i></div>  
+    <div class="down arr"><i class="fa fa-arrow-down"></i></div>
+    <div class="right arr"><i class="fa fa-arrow-right"></i></div>
+  </div>
+<h2>Your Score is: <span class="score">X</span></h2>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
