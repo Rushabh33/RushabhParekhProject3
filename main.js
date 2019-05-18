@@ -16,11 +16,11 @@ let newHead;
 let newTail;
 let dx = 10;
 let dy = 0;
-let snakeSpeed = 100;
+let snakeSpeed = 60;
 let canvasHeight = 320;
 let canvasWidth = 480;
-let foodX = Math.floor(Math.random() * canvas.width/10) * 10;  
-let foodY = Math.floor(Math.random() * canvas.height/10) * 10;
+let foodX;
+let foodY;
 let gameOver = false;
 
 
@@ -38,6 +38,7 @@ function snakeShift() {
     drawSnake();
     createNewFood();
     console.log(newHead);
+    detectApple();
 }
 
 // COLLISION DETECTION
@@ -61,13 +62,32 @@ function drawSnake(){
     snake.forEach(drawSnakePart)
 }
 
-// CREATE APPLE + Check if head touch apple
+// DRAW APPLE + Check if head touch apple
 function createNewFood() {
     ctx.fillStyle = 'red';
     ctx.strokeStyle = 'darkgreen';
     ctx.strokeRect(foodX, foodY, snakeSize, snakeSize);
     ctx.fillRect(foodX, foodY, snakeSize, snakeSize);
 }
+// CREATE APPLE COORDINATES
+function randomFoodCoor(){
+    foodX = Math.floor(Math.random() * canvas.width/10) * 10;  
+    foodY = Math.floor(Math.random() * canvas.height/10) * 10;
+}
+
+// EAT APPLE
+function detectApple(){
+    if (snake[0].x === foodX && snake[0].y === foodY){
+        // clearInterval(set);
+        newHead = {x: snake[0].x+dx, y: snake[0].y+dy}
+        snake.unshift(newHead);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        drawSnake();
+        randomFoodCoor();
+        createNewFood();
+    }
+}
+
 
 // CHANGE DIRECTION
 function snakeMovement() {
@@ -94,7 +114,8 @@ function snakeMovement() {
 // ****************************************************************
 snakeMovement();
 drawSnake();
-createNewFood();  
+randomFoodCoor();
+createNewFood(); 
 let set = setInterval(snakeShift, snakeSpeed);
 // ****************************************************************
 // ****************************************************************
