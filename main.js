@@ -10,8 +10,8 @@ let snake = [
   ];
 let snakeHead = snake[0];
 let snakeSize = 10
-let headCoorX = snake[0].x;
-let headCoorY = snake[0].y;
+let headCoorX;
+let headCoorY;
 let newHead;
 let newTail;
 let dx = 10;
@@ -28,6 +28,7 @@ let scoreUpdate = () =>{
     scoreDisplay.text(score);  
 } 
 let hitApple = false;
+let set;
 
 
 // REPEAT THIS TO MOVE SNAKE
@@ -42,6 +43,7 @@ function snakeShift() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     hitApple = false;
     drawSnake();
+    detectSelf1();
     createNewFood();
 }
 
@@ -91,6 +93,21 @@ function detectApple(){
     }
 }
 
+// SELF DETECTION
+function detectSelf1(){
+    for (i=1; i < snake.length; i++){
+        headCoorX = snake[0].x;
+        headCoorY = snake[0].y;
+        if (headCoorX == snake[i].x && headCoorY == snake[i].y) {
+                clearInterval(set);
+                console.log("detectSelf");
+        }
+    }    
+}
+
+// function detectSelf2(){
+//     snake.forEach(detectSelf1);
+// }
 
 // CHANGE DIRECTION
 function snakeMovement() {
@@ -148,7 +165,8 @@ snakeMovementArrows()
 drawSnake();
 randomFoodCoor();
 createNewFood(); 
-let set = setInterval(snakeShift, snakeSpeed);
+
+set = setInterval(snakeShift, snakeSpeed);
 // ****************************************************************
 // ****************************************************************
 
