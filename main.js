@@ -16,14 +16,18 @@ let newHead;
 let newTail;
 let dx = 10;
 let dy = 0;
-let snakeSpeed = 60;
+let snakeSpeed = 100;
 let canvasHeight = 320;
 let canvasWidth = 480;
 let foodX;
 let foodY;
 let gameOver = false;
-
-
+let score = 0;
+let scoreDisplay = $('.score'); 
+let scoreUpdate = () =>{
+    scoreDisplay.text(score);  
+} 
+let hitApple = false;
 
 
 // REPEAT THIS TO MOVE SNAKE
@@ -31,14 +35,14 @@ function snakeShift() {
     detectWalls();
     newHead = {x: snake[0].x+dx, y: snake[0].y+dy}
     snake.unshift(newHead);
-    if (snake[0].y < 320 && snake[0].y > -10 && snake[0].x > -10 && snake[0].x < 480){
+    detectApple();
+    if (snake[0].y < 320 && snake[0].y > -10 && snake[0].x > -10 && snake[0].x < 480 && hitApple == false){
         snake.pop();
     }   
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    hitApple = false;
     drawSnake();
     createNewFood();
-    console.log(newHead);
-    detectApple();
 }
 
 // COLLISION DETECTION
@@ -79,10 +83,9 @@ function randomFoodCoor(){
 function detectApple(){
     if (snake[0].x === foodX && snake[0].y === foodY){
         // clearInterval(set);
-        newHead = {x: snake[0].x+dx, y: snake[0].y+dy}
-        snake.unshift(newHead);
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        drawSnake();
+        score++;
+        scoreUpdate();
+        hitApple = true;
         randomFoodCoor();
         createNewFood();
     }
@@ -94,25 +97,54 @@ function snakeMovement() {
     $(".up.arr").on("click", function(){
         dx = 0;
         dy = -10;
+        // snakeShift();
     })
     $(".down.arr").on("click", function(){
         dx = 0;
         dy = 10;
+        // snakeShift();
     })
     $(".left.arr").on("click", function(){
         dx = -10;
         dy = 0;
+        // snakeShift();
     })
     $(".right.arr").on("click", function(){
         dx = 10;
         dy = 0;
+        // snakeShift();
     })
 }
 
+function snakeMovementArrows(){
+    $(document).keydown(function(e) {
+        switch(e.which) {
+            case 37:
+                dx = -10;
+                dy = 0;
+            break;
+            case 38: // up
+                dx = 0;
+                dy = -10;
+            break;
+            case 39: // right
+                dx = 10;
+                dy = 0;
+            break;
+            case 40: // down
+                dx = 0;
+                dy = 10;
+            break;
+            default: return; // exit this handler for other keys
+        }
+        e.preventDefault(); // prevent the default action (scroll / move caret)
+    });
+}
 
 // ****************************************************************
 // ****************************************************************
 snakeMovement();
+snakeMovementArrows()
 drawSnake();
 randomFoodCoor();
 createNewFood(); 
