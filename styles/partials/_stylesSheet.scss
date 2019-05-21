@@ -34,7 +34,12 @@ h1 span {
 }
 
 h3 {
-  @include font(20, $gameFont, $tTu, $fontColorW);
+  @include font(20, $gameFont, $tTu, $fontColorW); 
+  margin-bottom: 0;
+}
+
+.gameStartOverlay p{
+  margin: 0;
 }
 
 .scoreCon p {
@@ -47,4 +52,16 @@ section span {
 
 button {
   @include font(15, $gameFont, $tTu, $fontColorB);
+}
+
+.arrowKeys button {
+  padding: 3%;
+  margin-top: 0;
+}
+.arrowKeys button:last-child {
+  margin-right: 0; 
+}
+
+i {
+  font-size: 1.5rem;
 }

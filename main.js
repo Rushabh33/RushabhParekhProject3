@@ -3,6 +3,10 @@ const ctx = canvas.getContext('2d');
 const overlay = $(".gameStartOverlay");
 const overlayGameOver = $(".gameOverOverlay");
 const arrowKeys = $(".arrowKeys");
+const upKey = $(".up.arrow");
+const downKey = $(".down.arrow");
+const leftKey = $(".left.arrow");
+const rightKey = $(".right.arrow");
 const canvasContainer = $(".canvasContainer");
 const mobileModeButton = $(".mobileModeButt");
 const resetButton = $(".resetButt");
@@ -36,7 +40,7 @@ let gameOver = false;
 let score = 0;
 let hitApple = false;
 let set = 0;
-let activateKeys = false;
+let activateKeys = 0;
 
 // ******************* MAJOR *******************
 
@@ -70,57 +74,54 @@ function snakeShift() {
 
 // CHANGE DIRECTION ARROW KEYS
 function snakeMovementKeys(){
-    if (activateKeys == true){
         $(document).keydown(function(e) {
-            switch(e.which) {
-                case 37:
-                    dx = -10;
-                    dy = 0;
-                break;
-                case 38: // up
-                    dx = 0;
-                    dy = -10;
-                break;
-                case 39: // right
-                    dx = 10;
-                    dy = 0;
-                break;
-                case 40: // down
-                    dx = 0;
-                    dy = 10;
-                break;
-                default: return; // exit this handler for other keys
+            if (activateKeys = 1){
+                switch(e.which) {
+                    case 37:
+                        dx = -10;
+                        dy = 0;
+                    break;
+                    case 38: // up
+                        dx = 0;
+                        dy = -10;
+                    break;
+                    case 39: // right
+                        dx = 10;
+                        dy = 0;
+                    break;
+                    case 40: // down
+                        dx = 0;
+                        dy = 10;
+                    break;
+                    default: return; // exit this handler for other keys
+                }
+                e.preventDefault(); // prevent the default action (scroll / move caret)
             }
-            e.preventDefault(); // prevent the default action (scroll / move caret)
         });
-    }
 }
 
 // CHANGE DIRECTION MOBILE ARROWS
 function snakeMovementMobile() {
-    if (activateKeys == true){
-       $(".up.arrow").on("click", function(){
+        arrowKeys.on("click", function(){
+            mobileStart();
+        })
+        upKey.on("click", function(){
            dx = 0;
            dy = -10;
-           mobileStart();
        })
-       $(".down.arrow").on("click", function(){
+       downKey.on("click", function(){
            dx = 0;
            dy = 10;
-           mobileStart();
        })
-       $(".left.arrow").on("click", function(){
+       leftKey.on("click", function(){
            dx = -10;
            dy = 0;
-           mobileStart();
        })
-       $(".right.arrow").on("click", function(){
+       rightKey.on("click", function(){
            dx = 10;
            dy = 0;
-           mobileStart();
        })
    }
-}
 
 // CREATE RANDOM APPLE COORDINATES
 function randomFoodCoor(){
@@ -184,9 +185,6 @@ let mobileStart = () => {
         // Can't make the set = .... into a variable
         set = setInterval(snakeShift,snakeSpeed);
         overlay.attr("id", "destroy");
-        activateKeys = true;
-        snakeMovementMobile(); // to prevent changing directions before game starts
-        snakeMovementKeys(); // to prevent changing directions before game starts
     }  
 }
 
@@ -197,9 +195,8 @@ let desktopStart = () => {
             e.preventDefault(); // prevent the default
             overlay.attr("id", "destroy");
             set = setInterval(snakeShift,snakeSpeed);
-            activateKeys = true;
-            snakeMovementMobile(); // to prevent changing directions before game starts
-            snakeMovementKeys();// to prevent changing directions before game starts
+            activateKeys = 1;
+            snakeMovementKeys(); //prevent keys affecting UNTILL game begins
         }
     });
 }
@@ -209,7 +206,7 @@ let mobileModeFunc = () => {
     if (gameOver == false){
         mobileModeButton.click(function(){
             arrowKeys.toggleClass("destroy");
-            $(this).toggleClass("buttonPressed")
+            $(this).toggleClass("buttonPressed");
         })
     }
 }
@@ -235,6 +232,7 @@ let resetButtonFunc = () => {
         createNewFood(); 
         gameOver = false;
         checkGameOver();
+        mobileModeFunc();
     })
 }
 
@@ -253,8 +251,9 @@ const clearCanvas = function(){
 // ****************************************************************
 
 $(function(){
-    desktopStart();  // includes movement init - mobile & desktop
-    mobileModeFunc(); // includes movement init - mobile & desktop
+    desktopStart();
+    mobileModeFunc(); 
+    snakeMovementMobile();
     resetButtonFunc();
     drawSnake();
     randomFoodCoor();

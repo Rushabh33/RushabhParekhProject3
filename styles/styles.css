@@ -202,6 +202,11 @@ h3 {
   font-family: "Press Start 2P", cursive;
   text-transform: uppercase;
   color: white;
+  margin-bottom: 0;
+}
+
+.gameStartOverlay p {
+  margin: 0;
 }
 
 .scoreCon p {
@@ -223,6 +228,19 @@ button {
   font-family: "Press Start 2P", cursive;
   text-transform: uppercase;
   color: black;
+}
+
+.arrowKeys button {
+  padding: 3%;
+  margin-top: 0;
+}
+
+.arrowKeys button:last-child {
+  margin-right: 0;
+}
+
+i {
+  font-size: 1.5rem;
 }
 
 body {
@@ -267,6 +285,7 @@ body {
           justify-content: center;
   text-align: center;
   color: #FDFFFC;
+  padding: 5%;
 }
 
 canvas {
