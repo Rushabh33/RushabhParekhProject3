@@ -1,6 +1,7 @@
 const canvas = $("#myCanvas").get(0);
 const ctx = canvas.getContext('2d');
 const overlay = $(".overlay");
+const overlayGameOver = $(".overlay2");
 const arrowKeys = $(".arrowKeys");
 let snake = [
     {x: 150, y: 150},
@@ -18,8 +19,8 @@ let newTail;
 let dx = 10;
 let dy = 0;
 let snakeSpeed = 100;
-let canvasHeight = 320;
-let canvasWidth = 480;
+let canvasHeight = 700;
+let canvasWidth = 800;
 let foodX;
 let foodY;
 let gameOver = false;
@@ -33,13 +34,14 @@ let set = 0;
 let activateKeys = true;
 
 
+
 // REPEAT THIS TO MOVE SNAKE
 function snakeShift() {
     detectWalls();
     newHead = {x: snake[0].x+dx, y: snake[0].y+dy}
     snake.unshift(newHead);
     detectApple();
-    if (snake[0].y < 320 && snake[0].y > -10 && snake[0].x > -10 && snake[0].x < 480 && hitApple == false){
+    if (snake[0].y < canvasHeight && snake[0].y > -10 && snake[0].x > -10 && snake[0].x < canvasWidth && hitApple == false){
         snake.pop();
     }   
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -51,11 +53,12 @@ function snakeShift() {
 
 // COLLISION DETECTION
 function detectWalls(){
-    if (snake[0].x == -10 || snake[0].y == 320 || snake[0].x == 480 || snake[0].y == -10){
+    if (snake[0].x == -10 || snake[0].y == canvasHeight || snake[0].x == canvasWidth || snake[0].y == -10){
        clearInterval(set);
        console.log("checking for collision");
        console.log("working?!");
        gameOver = true;
+       checkGameOver();
    }
 }
 
@@ -104,32 +107,34 @@ function detectSelf1(){
         if (headCoorX == snake[i].x && headCoorY == snake[i].y) {
                 clearInterval(set);
                 console.log("detectSelf");
+                gameOver = true
+                checkGameOver();
         }
     }    
 }
 
 // CHANGE DIRECTION
 function snakeMovement() {
-   if (activateKeys = true){
+    if (activateKeys = true){
        $(".up.arr").on("click", function(){
            dx = 0;
            dy = -10;
-           // snakeShift();
+           mobileStart();
        })
        $(".down.arr").on("click", function(){
            dx = 0;
            dy = 10;
-           // snakeShift();
+           mobileStart();
        })
        $(".left.arr").on("click", function(){
            dx = -10;
            dy = 0;
-           // snakeShift();
+           mobileStart();
        })
        $(".right.arr").on("click", function(){
            dx = 10;
            dy = 0;
-           // snakeShift();
+           mobileStart();
        })
    }
 }
@@ -167,9 +172,24 @@ $(".container").on('keydown', function(e){
     }
 });
 
-$(".hardModeButt").click(function(){
-    arrowKeys.toggleClass("destroy");
-})
+let tipsyMode = function(){
+    if (gameOver == false){
+        $(".hardModeButt").click(function(){
+            arrowKeys.toggleClass("destroy");
+            $(this).toggleClass("buttonPressed")
+        })
+    }
+}
+
+tipsyMode();
+
+let mobileStart = () => {
+    if (set == 0){
+        overlay.attr("id", "destroy");
+        set = setInterval(snakeShift,snakeSpeed) 
+    }  
+}
+
 
 $(".resetButt").click(function(){
     score = 0;
@@ -188,7 +208,18 @@ $(".resetButt").click(function(){
     drawSnake();
     randomFoodCoor();
     createNewFood(); 
+    gameOver = false;
+    checkGameOver();
 })
+
+function checkGameOver(){
+    if (gameOver == true){
+        overlayGameOver.removeClass("destroy");
+    }
+    if (gameOver == false){
+        overlayGameOver.addClass("destroy");
+    }
+}
 
 // ****************************************************************
 // ****************************************************************

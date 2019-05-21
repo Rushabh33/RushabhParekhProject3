@@ -186,6 +186,10 @@ h1 {
   color: black;
 }
 
+body {
+  background-color: #C2E0EB;
+}
+
 h1 span {
   padding-left: 35%;
 }
@@ -218,7 +222,8 @@ h1 {
   display: inline-block;
 }
 
-.overlay {
+.overlay,
+.overlay2 {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -244,7 +249,6 @@ canvas {
   display: block;
   width: 100%;
   border: 1px solid black;
-  height: 50vh;
   -webkit-box-shadow: 0 0 0 10px #5F7E96;
           box-shadow: 0 0 0 10px #5F7E96;
 }
@@ -313,6 +317,12 @@ button:active {
           transform: scale(0.8);
 }
 
+.buttonPressed {
+  background: #97640F;
+  -webkit-transform: scale(0.8);
+          transform: scale(0.8);
+}
+
 .scoreCon {
   width: 50%;
   text-align: center;
@@ -339,7 +349,7 @@ button:active {
 }
 
 footer {
-  height: 20vh;
+  height: 10vh;
 }
 
 .wrapper {
@@ -358,5 +368,27 @@ footer {
 span {
   display: block;
   padding-top: 3%;
+}
+
+ol {
+  margin: 0;
+  padding: 0;
+}
+
+@media (max-width: 750px) {
+  h1 {
+    font-size: calc(8vw + 1rem);
+    margin-bottom: 4%;
+  }
+}
+
+@media (max-width: 558px) {
+  .overlay p {
+    padding: 0;
+    margin: 0;
+  }
+  .overlay {
+    padding: 6%;
+  }
 }
 /*# sourceMappingURL=styles.css.map */

@@ -1,3 +1,8 @@
+// Overall styles **************
+body {
+    background-color: $webPageColor;
+}
+
 // HEADER********************
 h1 span {
     padding-left: 35%;
@@ -23,10 +28,10 @@ h1 {
 .container {
     position: relative;
     display: inline-block;
-    // width: 50vw;
 }
 
-.overlay {
+.overlay,
+.overlay2 {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -40,15 +45,13 @@ h1 {
     color: white;
 }
 
-
-
 canvas {
     background-color: #001627;
     display: block;
     width: 100%;
     // margin: 0 auto;
     border: 1px solid black;
-    height: 50vh;
+    // height: 50vh;
     box-shadow: 0 0 0 10px #5F7E96;
 }
 
@@ -103,6 +106,11 @@ button:active {
     transform: scale(0.8);
 }
 
+.buttonPressed {
+    background: #97640F;
+    transform: scale(0.8);
+}
+
 .scoreCon {
     width: 50%;
     text-align: center;
@@ -127,7 +135,7 @@ button:active {
 
 // GAME SECTION **************
 footer {
-    height: 20vh;
+    height: 10vh;
 }
 
 // Universal********************
@@ -149,3 +157,7 @@ span {
     padding-top: 3%;
 }
 
+ol {
+    margin: 0;
+    padding: 0;
+}
