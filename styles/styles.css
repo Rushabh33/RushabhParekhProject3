@@ -184,24 +184,49 @@ h1 {
   font-family: "Press Start 2P", cursive;
   text-transform: uppercase;
   color: black;
-}
-
-body {
-  background-color: #C2E0EB;
-}
-
-h1 span {
-  padding-left: 35%;
-}
-
-h1 {
+  font-size: calc(8vh + 1rem);
   -webkit-transform: rotate(-10deg);
           transform: rotate(-10deg);
   display: inline-block;
   padding-left: 10%;
   padding-top: 4%;
   margin: 3% 0 0;
-  font-size: calc(8vh + 1rem);
+}
+
+h1 span {
+  padding-left: 35%;
+}
+
+h3 {
+  font-size: 1rem;
+  font-family: "Press Start 2P", cursive;
+  text-transform: uppercase;
+  color: white;
+}
+
+.scoreCon p {
+  font-size: 1rem;
+  font-family: "Press Start 2P", cursive;
+  text-transform: uppercase;
+  color: black;
+}
+
+section span {
+  font-size: 2rem;
+  font-family: "Press Start 2P", cursive;
+  text-transform: uppercase;
+  color: white;
+}
+
+button {
+  font-size: 0.75rem;
+  font-family: "Press Start 2P", cursive;
+  text-transform: uppercase;
+  color: black;
+}
+
+body {
+  background-color: #C2E0EB;
 }
 
 .gameCanvas {
@@ -217,13 +242,13 @@ h1 {
           align-items: center;
 }
 
-.container {
+.canvasContainer {
   position: relative;
   display: inline-block;
 }
 
-.overlay,
-.overlay2 {
+.gameStartOverlay,
+.gameOverOverlay {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -241,22 +266,24 @@ h1 {
       -ms-flex-pack: center;
           justify-content: center;
   text-align: center;
-  color: white;
+  color: #FDFFFC;
 }
 
 canvas {
   background-color: #001627;
   display: block;
-  width: 100%;
-  border: 1px solid black;
   -webkit-box-shadow: 0 0 0 10px #5F7E96;
           box-shadow: 0 0 0 10px #5F7E96;
 }
 
+canvas,
+.controlPanelCon {
+  width: 100%;
+}
+
 .controlPanelCon {
   background-color: #5F7E96;
-  width: 100%;
-  max-width: 550px;
+  max-width: 800px;
   padding: 20px;
 }
 
@@ -294,10 +321,10 @@ button {
   background: #FFA000;
   cursor: pointer;
   text-align: center;
-  -webkit-transition: background 250ms ease-in-out,  -webkit-transform 150ms ease;
-  transition: background 250ms ease-in-out,  -webkit-transform 150ms ease;
-  transition: background 250ms ease-in-out,  transform 150ms ease;
-  transition: background 250ms ease-in-out,  transform 150ms ease,  -webkit-transform 150ms ease;
+  -webkit-transition: all 250ms ease-in-out,  -webkit-transform 150ms ease;
+  transition: all 250ms ease-in-out,  -webkit-transform 150ms ease;
+  transition: all 250ms ease-in-out,  transform 150ms ease;
+  transition: all 250ms ease-in-out,  transform 150ms ease,  -webkit-transform 150ms ease;
   -webkit-appearance: none;
   -moz-appearance: none;
 }
@@ -308,7 +335,7 @@ button:focus {
 }
 
 button:focus {
-  outline: 1px solid #fff;
+  outline: 1px solid #FDFFFC;
   outline-offset: -4px;
 }
 
@@ -336,7 +363,7 @@ button:active {
   display: -ms-flexbox;
   display: flex;
   font-size: 3rem;
-  background-color: white;
+  background-color: #FDFFFC;
   border: 0 solid #5F7E96;
   border-radius: 10px;
   -webkit-box-pack: center;
@@ -344,8 +371,8 @@ button:active {
           justify-content: center;
 }
 
-.arr {
-  margin-right: 3%;
+.arrow {
+  margin-right: 5%;
 }
 
 footer {

@@ -4,27 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Snake</title>
+    <title>Snake Game</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Press+Start+2P|Roboto:400,400i,500,500i,700,700i,900,900i&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
     <header>
-        <h1>tipsy <span>snake</span></h1>    
+        <h1>tipsy<span>snake</span></h1>    
     </header>
-    <section class="gameSection" id="gameSection">
+    <section>
         <div class="gameCanvas wrapper">
-
-            <div class="container" id="test" tabindex="0">
+            <div class="canvasContainer" tabindex="0">
                 <canvas id="myCanvas" width="800" height="700"></canvas>
-                <div class="overlay">
-                        <div class="normalMode">
-                            <h3>To start game:</h3>
-                            <p>click HERE & press space to begin</p>
-                            <p>OR choose MOBILE MODE and click on an arrow to begin!</p>
+                <div class="gameStartOverlay">
+                        <div>
+                            <h3>to start game:</h3>
+                            <p>click here & press space to begin</p>
+                            <p>MOBILE MODE: click on an arrow to begin and move snake!</p>
                         </div>
-                        <h3>RULES:</h3>
+                        <h3>rules:</h3>
                         <ol>
                             <li>Don't eat the walls OR yourself</li>
                             <li>Don't go in reverse because you'll eat yourself</li>
@@ -32,7 +31,7 @@
                             <li>If using mobile - turn on mobile mode!</li>
                         </ol>
                 </div>
-                <div class="overlay2 destroy">
+                <div class="gameOverOverlay destroy">
                         <h3>You died! I told you to only eat the apples!!!</h3>
                         <p>Go ahead and reset the game to play again.</p>
                 </div>
@@ -41,10 +40,10 @@
 
             <div class="controlPanelCon">                
                 <div class="arrowKeys destroy">
-                    <div class="up arr"><i class="fa fa-arrow-up"></i></div>
-                    <div class="left arr"><i class="fa fa-arrow-left"></i></div>  
-                    <div class="down arr"><i class="fa fa-arrow-down"></i></div>
-                    <div class="right arr"><i class="fa fa-arrow-right"></i></div>
+                    <div class="up arrow"><i class="fa fa-arrow-up"></i></div>
+                    <div class="left arrow"><i class="fa fa-arrow-left"></i></div>  
+                    <div class="down arrow"><i class="fa fa-arrow-down"></i></div>
+                    <div class="right arrow"><i class="fa fa-arrow-right"></i></div>
                 </div>
                 <div class="controlPanel">
                     <div class="scoreCon">

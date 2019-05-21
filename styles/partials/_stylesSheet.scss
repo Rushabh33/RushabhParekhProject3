@@ -1,23 +1,50 @@
 $primary: #001627;
+$secondary: #5F7E96;
 $snakeColor: #19C8B8;
 $accentColor: #FFA000;
+$darkAccentColor: #97640F;
 $webPageColor: #C2E0EB;
+$overlayColor: rgba(0,0,0,0.7);
 $white: #FDFFFC;
-$color: black;
+$fontColorB: black;
+$fontColorW: white;
 $gameFont: 'Press Start 2P', cursive;
 $roboto: 'Roboto', sans-serif;
 $tTu: uppercase;
 
-
-
-@mixin font($sizeValuePX, $fontChoice, $transform) {
+@mixin font($sizeValuePX, $fontChoice, $transform, $fontColor) {
     font-size: ($sizeValuePX/20) * 1rem;
     font-family: $fontChoice;
     text-transform: $transform;
-    color: $color;
-  }
-
-h1 {
-  @include font(100, $gameFont, $tTu);
+    color: $fontColor;
 }
 
+h1 {
+  @include font(100, $gameFont, $tTu, $fontColorB);
+  font-size: calc(8vh + 1rem);
+  transform: rotate(-10deg);
+  display: inline-block;
+  padding-left: 10%;
+  padding-top: 4%;
+  margin: 3% 0 0;
+}
+
+h1 span {
+  padding-left: 35%;
+}
+
+h3 {
+  @include font(20, $gameFont, $tTu, $fontColorW);
+}
+
+.scoreCon p {
+  @include font(20, $gameFont, $tTu, $fontColorB);
+}
+
+section span {
+  @include font(40, $gameFont, $tTu, $fontColorW);
+}
+
+button {
+  @include font(15, $gameFont, $tTu, $fontColorB);
+}

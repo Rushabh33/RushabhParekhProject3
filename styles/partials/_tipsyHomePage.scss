@@ -1,66 +1,47 @@
 // Overall styles **************
-body {
-    background-color: $webPageColor;
-}
-
-// HEADER********************
-h1 span {
-    padding-left: 35%;
-}
-
-h1 {
-    transform: rotate(-10deg);
-    display: inline-block;
-    padding-left: 10%;
-    padding-top: 4%;
-    margin: 3% 0 0; 
-    font-size: calc(8vh + 1rem);
-}
+body {background-color: $webPageColor;}
 
 // GAME SECTION **************
-
 .gameCanvas {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.container {
+.canvasContainer {
     position: relative;
     display: inline-block;
 }
 
-.overlay,
-.overlay2 {
+.gameStartOverlay,
+.gameOverOverlay {
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: rgba(0,0,0,0.7);
+    background-color: $overlayColor;
     display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: center;
-    color: white;
+    color: $white;
 }
 
 canvas {
-    background-color: #001627;
+    background-color: $primary;
     display: block;
-    width: 100%;
-    // margin: 0 auto;
-    border: 1px solid black;
-    // height: 50vh;
-    box-shadow: 0 0 0 10px #5F7E96;
+    box-shadow: 0 0 0 10px $secondary;
 }
 
-.controlPanelCon {
-    background-color: #5F7E96;
-    width: 100%;
-    max-width: 550px;
-    padding: 20px;
+canvas,
+.controlPanelCon {width: 100%;}
 
+// CONTROLS SECTION **************
+.controlPanelCon {
+    background-color: $secondary;
+    max-width: $canvasWidth;
+    padding: 20px;
 }
 
 .controlPanel {
@@ -83,10 +64,10 @@ button {
     margin: 4% 0 0;
     border-radius: 10px;
     text-decoration: none;
-    background: #FFA000;
+    background: $accentColor;
     cursor: pointer;
     text-align: center;
-    transition: background 250ms ease-in-out, 
+    transition: all 250ms ease-in-out, 
     transform 150ms ease;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -94,11 +75,11 @@ button {
 
 button:hover,
 button:focus {
-    background: #97640F;
+    background: $darkAccentColor;
 }
 
 button:focus {
-    outline: 1px solid #fff;
+    outline: 1px solid $white;
     outline-offset: -4px;
 }
 
@@ -107,7 +88,7 @@ button:active {
 }
 
 .buttonPressed {
-    background: #97640F;
+    background: $darkAccentColor;
     transform: scale(0.8);
 }
 
@@ -122,18 +103,16 @@ button:active {
     padding: 10px;
     display: flex;
     font-size: 3rem;
-    background-color: white;
-    border:  0 solid #5F7E96;
+    background-color: $white;
+    border:  0 solid $secondary;
     border-radius: 10px;
     justify-content: center;
 }
 
-.arr {
-    margin-right: 3%;
-}
+.arrow {margin-right: 5%;}
 
 
-// GAME SECTION **************
+
 footer {
     height: 10vh;
 }
