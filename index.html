@@ -6,41 +6,45 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Snake</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-    <style>
-    canvas {
-        background-color: rgb(94, 136, 150);
-        display: block;
-        margin: 0 auto;
-        border: 1px solid black;
-        max-width: 100%;
-    }
-
-    .keys {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        margin-top: 5%;
-        font-size: 3rem;
-    }
-
-    .arr {
-        margin-right: 3%;
-    }
-    
-    </style>
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P|Roboto:400,400i,500,500i,700,700i,900,900i&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
+    <header>
+        <h1>tipsy <span>snake</span></h1>    
+    </header>
+    <section class="gameSection" id="gameSection">
+        <div class="gameCanvas wrapper">
+
+            <div class="container" id="test" tabindex="0">
+                <canvas id="myCanvas" width="480" height="320"></canvas>
+                <div class="overlay">
+                        <p>press space to begin</p>
+                </div>
+            </div>
+
+            <div class="controlPanelCon">                <div class="arrowKeys destroy">
+                    <div class="up arr"><i class="fa fa-arrow-up"></i></div>
+                    <div class="left arr"><i class="fa fa-arrow-left"></i></div>  
+                    <div class="down arr"><i class="fa fa-arrow-down"></i></div>
+                    <div class="right arr"><i class="fa fa-arrow-right"></i></div>
+                </div>
+                <div class="controlPanel">
+                    <div class="scoreCon">
+                        <p>Your Score is: <span class="score">0</span></p>        
+                    </div>
+                    <div class="buttonCon">
+                        <button class="resetButt">Reset Game</button>
+                        <button class="hardModeButt" >Hard Mode</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+<footer>
     
-<canvas id="myCanvas" width="480" height="320" ></canvas>
-
-
-<div class="keys">
-    <div class="up arr"><i class="fa fa-arrow-up"></i></div>
-    <div class="left arr"><i class="fa fa-arrow-left"></i></div>  
-    <div class="down arr"><i class="fa fa-arrow-down"></i></div>
-    <div class="right arr"><i class="fa fa-arrow-right"></i></div>
-  </div>
-<h2>Your Score is: <span class="score">X</span></h2>
+</footer>
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>

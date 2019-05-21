@@ -1,0 +1,21 @@
+$primary: #001627;
+$snakeColor: #19C8B8;
+$backgroundColor: #FDFFFC;
+$color: black;
+$gameFont: 'Press Start 2P', cursive;
+$roboto: 'Roboto', sans-serif;
+$tTu: uppercase;
+
+
+
+@mixin font($sizeValuePX, $fontChoice, $transform) {
+    font-size: ($sizeValuePX/20) * 1rem;
+    font-family: $fontChoice;
+    text-transform: $transform;
+    color: $color;
+  }
+
+h1 {
+  @include font(100, $gameFont, $tTu);
+}
+

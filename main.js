@@ -1,6 +1,7 @@
 const canvas = $("#myCanvas").get(0);
 const ctx = canvas.getContext('2d');
-
+const overlay = $(".overlay");
+const arrowKeys = $(".arrowKeys");
 let snake = [
     {x: 150, y: 150},
     {x: 140, y: 150},
@@ -28,7 +29,8 @@ let scoreUpdate = () =>{
     scoreDisplay.text(score);  
 } 
 let hitApple = false;
-let set;
+let set = 0;
+let activateKeys = true;
 
 
 // REPEAT THIS TO MOVE SNAKE
@@ -75,6 +77,7 @@ function createNewFood() {
     ctx.strokeRect(foodX, foodY, snakeSize, snakeSize);
     ctx.fillRect(foodX, foodY, snakeSize, snakeSize);
 }
+
 // CREATE APPLE COORDINATES
 function randomFoodCoor(){
     foodX = Math.floor(Math.random() * canvas.width/10) * 10;  
@@ -105,32 +108,30 @@ function detectSelf1(){
     }    
 }
 
-// function detectSelf2(){
-//     snake.forEach(detectSelf1);
-// }
-
 // CHANGE DIRECTION
 function snakeMovement() {
-    $(".up.arr").on("click", function(){
-        dx = 0;
-        dy = -10;
-        // snakeShift();
-    })
-    $(".down.arr").on("click", function(){
-        dx = 0;
-        dy = 10;
-        // snakeShift();
-    })
-    $(".left.arr").on("click", function(){
-        dx = -10;
-        dy = 0;
-        // snakeShift();
-    })
-    $(".right.arr").on("click", function(){
-        dx = 10;
-        dy = 0;
-        // snakeShift();
-    })
+   if (activateKeys = true){
+       $(".up.arr").on("click", function(){
+           dx = 0;
+           dy = -10;
+           // snakeShift();
+       })
+       $(".down.arr").on("click", function(){
+           dx = 0;
+           dy = 10;
+           // snakeShift();
+       })
+       $(".left.arr").on("click", function(){
+           dx = -10;
+           dy = 0;
+           // snakeShift();
+       })
+       $(".right.arr").on("click", function(){
+           dx = 10;
+           dy = 0;
+           // snakeShift();
+       })
+   }
 }
 
 function snakeMovementArrows(){
@@ -158,6 +159,37 @@ function snakeMovementArrows(){
     });
 }
 
+$(".container").on('keydown', function(e){
+    if (e.which == 32 && set == 0){
+        e.preventDefault(); // prevent the default
+        overlay.attr("id", "destroy");
+        set = setInterval(snakeShift,snakeSpeed);
+    }
+});
+
+$(".hardModeButt").click(function(){
+    arrowKeys.toggleClass("destroy");
+})
+
+$(".resetButt").click(function(){
+    score = 0;
+    scoreUpdate();
+    snake = [
+        {x: 150, y: 150},
+        {x: 140, y: 150},
+        {x: 130, y: 150},
+        {x: 120, y: 150},
+        {x: 110, y: 150},
+      ];
+    overlay.removeAttr("id");
+    clearInterval(set);
+    set = 0;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drawSnake();
+    randomFoodCoor();
+    createNewFood(); 
+})
+
 // ****************************************************************
 // ****************************************************************
 snakeMovement();
@@ -165,16 +197,8 @@ snakeMovementArrows()
 drawSnake();
 randomFoodCoor();
 createNewFood(); 
-
-set = setInterval(snakeShift, snakeSpeed);
 // ****************************************************************
 // ****************************************************************
-
-
-
-// function noBackwards()
-// function detectSelf(){}
-
 
 
 
