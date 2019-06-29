@@ -11,8 +11,8 @@ const canvasContainer = $(".canvasContainer");
 const mobileModeButton = $(".mobileModeButt");
 const resetButton = $(".resetButt");
 
-const canvasHeight = 480;
-const canvasWidth = 700;
+const canvasHeight = 240//480;
+const canvasWidth = 350//700;
 const scoreDisplay = $('.score'); 
 const snakeInsideColor = "#19C8B8";
 const snakeOutsideColor = "#073c37";
@@ -20,11 +20,11 @@ const appleColor = "red";
 const appleColorBorder = "#FFA000";
 
 let snake = [
-    {x: 150, y: 150},
-    {x: 140, y: 150},
-    {x: 130, y: 150},
-    {x: 120, y: 150},
-    {x: 110, y: 150},
+    {x: 70, y: 70},
+    {x: 60, y: 70},
+    {x: 50, y: 70},
+    {x: 40, y: 70},
+    {x: 30, y: 70},
   ];
 let snakeSize = 10
 let headCoorX;
@@ -127,8 +127,8 @@ function snakeMovementMobile() {
 
 // CREATE RANDOM APPLE COORDINATES
 function randomFoodCoor(){
-    foodX = Math.floor(Math.random() * canvas.width/10) * 10;  
-    foodY = Math.floor(Math.random() * canvas.height/10) * 10;
+    foodX = Math.floor(Math.random() * canvasWidth/10) * 10;  
+    foodY = Math.floor(Math.random() * canvasHeight/10) * 10;
 }
 // DRAW APPLE
 function createNewFood() {
@@ -226,6 +226,7 @@ let mobileStart = () => {
 
 // DESKTOP START ACTION
 let desktopStart = () => {
+        ctx.scale(2, 2);
     canvasContainer.on('keydown', function(e){
         if (e.which == 32 && set == 0){
             e.preventDefault(); // prevent the default
