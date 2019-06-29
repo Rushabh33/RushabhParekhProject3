@@ -11,8 +11,8 @@ const canvasContainer = $(".canvasContainer");
 const mobileModeButton = $(".mobileModeButt");
 const resetButton = $(".resetButt");
 
-const canvasHeight = 700;
-const canvasWidth = 800;
+const canvasHeight = 480;
+const canvasWidth = 700;
 const scoreDisplay = $('.score'); 
 const snakeInsideColor = "#19C8B8";
 const snakeOutsideColor = "#073c37";
@@ -42,7 +42,7 @@ let hitApple = false;
 let set = 0;
 let activateKeys = 0;
 
-// ******************* MAJOR *******************
+// ******************* Core Functionality *******************
 
 //DRAW THE SNAKE. TIGGER FUNCTION
 function drawSnakePart(snakeParts) {
@@ -75,7 +75,7 @@ function snakeShift() {
 // CHANGE DIRECTION ARROW KEYS
 function snakeMovementKeys(){
         $(document).keydown(function(e) {
-            if (activateKeys = 1){
+            if (activateKeys === 1){
                 switch(e.which) {
                     case 37:
                         dx = -10;
@@ -215,6 +215,7 @@ let mobileModeFunc = () => {
 let resetButtonFunc = () => {
     resetButton.click(function(){
         score = 0;
+        
         scoreUpdate();
         snake = [
             {x: 150, y: 150},
@@ -231,8 +232,12 @@ let resetButtonFunc = () => {
         randomFoodCoor();
         createNewFood(); 
         gameOver = false;
+        activateKeys = 0;
+        dx = 10;
+        dy = 0;
         checkGameOver();
         mobileModeFunc();
+        console.log(activateKeys)
     })
 }
 
