@@ -246,12 +246,10 @@ function settingInterval () {
 
 // BUTTON FUNCTION - MOBILE MODE
 let mobileModeFunc = () => {
-    if (gameOver == false){
         mobileModeButton.click(function(){
             arrowKeys.toggleClass("destroy");
             $(this).toggleClass("buttonPressed");
         })
-    }
 }
 
 // BUTTON FUNCTION - RESET GAME
@@ -263,11 +261,11 @@ let resetButtonFunc = () => {
         snakeSpeed = 100;
         scoreUpdate();
         snake = [
-            {x: 150, y: 150},
-            {x: 140, y: 150},
-            {x: 130, y: 150},
-            {x: 120, y: 150},
-            {x: 110, y: 150},
+            {x: 70, y: 70},
+            {x: 60, y: 70},
+            {x: 50, y: 70},
+            {x: 40, y: 70},
+            {x: 30, y: 70},
           ];
         overlay.removeAttr("id");
         clearInterval(set); // stop setInverval
