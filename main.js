@@ -11,8 +11,8 @@ const canvasContainer = $(".canvasContainer");
 const mobileModeButton = $(".mobileModeButt");
 const resetButton = $(".resetButt");
 
-const canvasHeight = 700;
-const canvasWidth = 800;
+const canvasHeight = 480;
+const canvasWidth = 700;
 const scoreDisplay = $('.score'); 
 const snakeInsideColor = "#19C8B8";
 const snakeOutsideColor = "#073c37";
@@ -41,8 +41,10 @@ let score = 0;
 let hitApple = false;
 let set = 0;
 let activateKeys = 0;
+let beverageType;
+let generatedBeverage = false;
 
-// ******************* MAJOR *******************
+// ******************* Core Functionality *******************
 
 //DRAW THE SNAKE. TIGGER FUNCTION
 function drawSnakePart(snakeParts) {
@@ -60,7 +62,7 @@ function snakeShift() {
     detectWalls();
     newHead = {x: snake[0].x+dx, y: snake[0].y+dy}
     snake.unshift(newHead);
-    // check if hitapple should be true
+    // check if food is hit
     detectApple();
     // remove tail unless (1) hit all (2) hit apple
     if (snake[0].y < canvasHeight && snake[0].y > -10 && snake[0].x > -10 && snake[0].x < canvasWidth && hitApple == false){snake.pop();}
@@ -75,7 +77,7 @@ function snakeShift() {
 // CHANGE DIRECTION ARROW KEYS
 function snakeMovementKeys(){
         $(document).keydown(function(e) {
-            if (activateKeys = 1){
+            if (activateKeys === 1){
                 switch(e.which) {
                     case 37:
                         dx = -10;
@@ -130,14 +132,48 @@ function randomFoodCoor(){
 }
 // DRAW APPLE
 function createNewFood() {
-    ctx.fillStyle = appleColor;
-    ctx.strokeStyle = appleColorBorder;
-    ctx.strokeRect(foodX, foodY, snakeSize, snakeSize);
-    ctx.fillRect(foodX, foodY, snakeSize, snakeSize);
+    
+    if (generatedBeverage === false) {
+        //create the new beverage
+        img = new Image();
+        img.src = "assets/applesANDdrinkSpriteSheet.png"
+        console.log("reset")
+        beverageNumber = Math.floor(Math.random() * 7);
+        beverageSourceX = beverageNumber * 82; // 82 is the width of each sprite
+        //Draw the new beverage
+        console.log("hello?")
+        ctx.drawImage(img, beverageSourceX, 0, 82, 100, foodX, foodY, 10, 10);        
+        generatedBeverage = true;
+        //Record the new beverage type to eventually influence the snake speed
+        if (beverageNumber < 4) {
+            beverageType = "apple";
+            console.log("createnewfood-beverageType-apple");
+        } else {
+            beverageType = "martini";
+            console.log("createnewfood-beverageType-martini");
+        };
+    } else if (set != 0) {
+        ctx.drawImage(img, beverageSourceX, 0, 82, 100, foodX, foodY, 10, 10);
+    }
+
+    // ctx.fillStyle = appleColor;
+    // ctx.strokeStyle = appleColorBorder;
+    // ctx.strokeRect(foodX, foodY, snakeSize, snakeSize);
+    // ctx.fillRect(foodX, foodY, snakeSize, snakeSize);
 }
+
 // EAT APPLE
 function detectApple(){
     if (snake[0].x === foodX && snake[0].y === foodY){
+        console.log(beverageType)
+        if (beverageType === "apple"){
+            snakeSpeed = 100;
+            settingInterval();
+        } else if(beverageType === "martini") {
+            snakeSpeed = 50;
+            settingInterval();
+        }
+        generatedBeverage = false;
         score++;
         scoreUpdate();
         hitApple = true;
@@ -201,6 +237,12 @@ let desktopStart = () => {
     });
 }
 
+// Set interval and Snake Speed
+function settingInterval () {
+    clearInterval(set)
+    set = setInterval(snakeShift,snakeSpeed);
+}
+
 // BUTTON FUNCTION - MOBILE MODE
 let mobileModeFunc = () => {
     if (gameOver == false){
@@ -215,6 +257,9 @@ let mobileModeFunc = () => {
 let resetButtonFunc = () => {
     resetButton.click(function(){
         score = 0;
+        beverageType = false;
+        
+        snakeSpeed = 100;
         scoreUpdate();
         snake = [
             {x: 150, y: 150},
@@ -230,9 +275,14 @@ let resetButtonFunc = () => {
         drawSnake();
         randomFoodCoor();
         createNewFood(); 
+        generatedBeverage = false;
         gameOver = false;
+        activateKeys = 0;
+        dx = 10;
+        dy = 0;
         checkGameOver();
         mobileModeFunc();
+        console.log(activateKeys)
     })
 }
 
@@ -267,3 +317,4 @@ $(function(){
 
 
 
+ 

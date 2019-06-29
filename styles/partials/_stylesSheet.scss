@@ -20,13 +20,13 @@ $tTu: uppercase;
 }
 
 h1 {
-  @include font(100, $gameFont, $tTu, $fontColorB);
-  font-size: calc(8vh + 1rem);
+  @include font(90, $gameFont, $tTu, $fontColorB);
+  font-size: calc(8vh + 0.5rem); //point to improve: this is rewriting the 90px given in the mixin
   transform: rotate(-10deg);
   display: inline-block;
   padding-left: 10%;
   padding-top: 4%;
-  margin: 3% 0 0;
+  margin: 0;
 }
 
 h1 span {
