@@ -20,11 +20,11 @@ const appleColor = "red";
 const appleColorBorder = "#FFA000";
 
 let snake = [
-    {x: 150, y: 150},
-    {x: 140, y: 150},
-    {x: 130, y: 150},
-    {x: 120, y: 150},
-    {x: 110, y: 150},
+    {x: 70, y: 70},
+    {x: 60, y: 70},
+    {x: 50, y: 70},
+    {x: 40, y: 70},
+    {x: 30, y: 70},
   ];
 let snakeSize = 10
 let headCoorX;
