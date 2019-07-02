@@ -11,13 +11,15 @@ const canvasContainer = $(".canvasContainer");
 const mobileModeButton = $(".mobileModeButt");
 const resetButton = $(".resetButt");
 
-const canvasHeight = 240//480;
-const canvasWidth = 350//700;
+const canvasHeight = 240;
+const canvasWidth = 350;
 const scoreDisplay = $('.score'); 
 const snakeInsideColor = "#19C8B8";
 const snakeOutsideColor = "#073c37";
-const appleColor = "red";
-const appleColorBorder = "#FFA000";
+
+// Replaced by using sprites: 
+    // const appleColor = "red";
+    // const appleColorBorder = "#FFA000";
 
 let snake = [
     {x: 70, y: 70},
@@ -38,11 +40,11 @@ let foodX;
 let foodY;
 let gameOver = false;
 let score = 0;
-let hitApple = false;
+let hitFood = false;
 let set = 0;
 let activateKeys = 0;
-let beverageType;
-let generatedBeverage = false;
+let foodType;
+let generatedFood = false;
 
 // ******************* Core Functionality *******************
 
@@ -65,9 +67,9 @@ function snakeShift() {
     // check if food is hit
     detectApple();
     // remove tail unless (1) hit all (2) hit apple
-    if (snake[0].y < canvasHeight && snake[0].y > -10 && snake[0].x > -10 && snake[0].x < canvasWidth && hitApple == false){snake.pop();}
+    if (snake[0].y < canvasHeight && snake[0].y > -10 && snake[0].x > -10 && snake[0].x < canvasWidth && hitFood === false){snake.pop();}
     // reset hit apple back to false   
-    hitApple = false;
+    hitFood = false;
     clearCanvas();
     drawSnake();
     detectSelf();
@@ -133,50 +135,49 @@ function randomFoodCoor(){
 // DRAW APPLE
 function createNewFood() {
     
-    if (generatedBeverage === false) {
+    if (generatedFood === false) {
         //create the new beverage
         img = new Image();
         img.src = "assets/applesANDdrinkSpriteSheet.png"
         console.log("reset")
-        beverageNumber = Math.floor(Math.random() * 7);
-        beverageSourceX = beverageNumber * 82; // 82 is the width of each sprite
+        foodNumber = Math.floor(Math.random() * 7);
+        spriteSourceX = foodNumber * 82; // 82 is the width of each sprite
         //Draw the new beverage
         console.log("hello?")
-        ctx.drawImage(img, beverageSourceX, 0, 82, 100, foodX, foodY, 10, 10);        
-        generatedBeverage = true;
+        ctx.drawImage(img, spriteSourceX, 0, 82, 100, foodX, foodY, 10, 10);        
+        generatedFood = true;
         //Record the new beverage type to eventually influence the snake speed
-        if (beverageNumber < 4) {
-            beverageType = "apple";
-            console.log("createnewfood-beverageType-apple");
+        if (foodNumber < 4) {
+            foodType = "apple";
         } else {
-            beverageType = "martini";
-            console.log("createnewfood-beverageType-martini");
+            foodType = "martini";
         };
     } else if (set != 0) {
-        ctx.drawImage(img, beverageSourceX, 0, 82, 100, foodX, foodY, 10, 10);
+        ctx.drawImage(img, spriteSourceX, 0, 82, 100, foodX, foodY, 10, 10);
     }
 
-    // ctx.fillStyle = appleColor;
-    // ctx.strokeStyle = appleColorBorder;
-    // ctx.strokeRect(foodX, foodY, snakeSize, snakeSize);
-    // ctx.fillRect(foodX, foodY, snakeSize, snakeSize);
+    // Replaced by sprites
+        // ctx.fillStyle = appleColor;
+        // ctx.strokeStyle = appleColorBorder;
+        // ctx.strokeRect(foodX, foodY, snakeSize, snakeSize);
+        // ctx.fillRect(foodX, foodY, snakeSize, snakeSize);
 }
 
 // EAT APPLE
 function detectApple(){
     if (snake[0].x === foodX && snake[0].y === foodY){
-        console.log(beverageType)
-        if (beverageType === "apple"){
+        console.log(foodType)
+        if (foodType === "apple"){
             snakeSpeed = 100;
             settingInterval();
-        } else if(beverageType === "martini") {
+        } else if(foodType === "martini") {
             snakeSpeed = 50;
             settingInterval();
         }
-        generatedBeverage = false;
+        generatedFood = false;
         score++;
         scoreUpdate();
-        hitApple = true;
+        hitFood = true;
         randomFoodCoor();
         createNewFood();
     }
@@ -188,7 +189,7 @@ function detectSelf(){
     for (i=1; i < snake.length; i++){
         headCoorX = snake[0].x;
         headCoorY = snake[0].y;
-        if (headCoorX == snake[i].x && headCoorY == snake[i].y) {
+        if (headCoorX === snake[i].x && headCoorY === snake[i].y) {
                 clearInterval(set);
                 gameOver = true
                 checkGameOver();
@@ -198,7 +199,7 @@ function detectSelf(){
 
 // COLLISION DETECTION
 function detectWalls(){
-    if (snake[0].x == -10 || snake[0].y == canvasHeight || snake[0].x == canvasWidth || snake[0].y == -10){
+    if (snake[0].x === -10 || snake[0].y === canvasHeight || snake[0].x === canvasWidth || snake[0].y === -10){
        clearInterval(set);
        gameOver = true;
        checkGameOver();
@@ -207,17 +208,17 @@ function detectWalls(){
 
 // GAME OVER OVERLAY
 function checkGameOver(){
-    if (gameOver == true){
+    if (gameOver === true){
         overlayGameOver.removeClass("destroy");
     }
-    if (gameOver == false){
+    if (gameOver === false){
         overlayGameOver.addClass("destroy");
     }
 }
 
 // MOBILE START ACTION
 let mobileStart = () => {
-    if (set == 0){
+    if (set === 0){
         // Can't make the set = .... into a variable
         set = setInterval(snakeShift,snakeSpeed);
         overlay.attr("id", "destroy");
@@ -228,7 +229,7 @@ let mobileStart = () => {
 let desktopStart = () => {
         ctx.scale(2, 2);
     canvasContainer.on('keydown', function(e){
-        if (e.which == 32 && set == 0){
+        if (e.which === 32 && set === 0){
             e.preventDefault(); // prevent the default
             overlay.attr("id", "destroy");
             set = setInterval(snakeShift,snakeSpeed);
@@ -256,7 +257,7 @@ let mobileModeFunc = () => {
 let resetButtonFunc = () => {
     resetButton.click(function(){
         score = 0;
-        beverageType = false;
+        foodType = false;
         
         snakeSpeed = 100;
         scoreUpdate();
@@ -274,7 +275,7 @@ let resetButtonFunc = () => {
         drawSnake();
         randomFoodCoor();
         createNewFood(); 
-        generatedBeverage = false;
+        generatedFood = false;
         gameOver = false;
         activateKeys = 0;
         dx = 10;
