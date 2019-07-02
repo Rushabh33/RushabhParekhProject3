@@ -34,8 +34,12 @@ h1 span {
 }
 
 h3 {
-  @include font(20, $gameFont, $tTu, $fontColorW); 
+  @include font(15, $gameFont, $tTu, $fontColorW); 
   margin-bottom: 0;
+}
+
+h3:first-child {
+  margin-top: 0;
 }
 
 .gameStartOverlay p{

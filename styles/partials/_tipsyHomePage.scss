@@ -30,6 +30,12 @@ body {background-color: $webPageColor;}
     padding: 5%;
 }
 
+
+ol {
+    padding-left: 18%;
+    text-align: left;
+}
+
 canvas {
     background-color: $primary;
     display: block;
@@ -140,5 +146,5 @@ span {
 
 ol {
     margin: 0;
-    padding: 0;
+    // padding: 0;
 }

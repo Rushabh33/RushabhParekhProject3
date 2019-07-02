@@ -198,11 +198,15 @@ h1 span {
 }
 
 h3 {
-  font-size: 1rem;
+  font-size: 0.75rem;
   font-family: "Press Start 2P", cursive;
   text-transform: uppercase;
   color: white;
   margin-bottom: 0;
+}
+
+h3:first-child {
+  margin-top: 0;
 }
 
 .gameStartOverlay p {
@@ -286,6 +290,11 @@ body {
   text-align: center;
   color: #FDFFFC;
   padding: 5%;
+}
+
+ol {
+  padding-left: 18%;
+  text-align: left;
 }
 
 canvas {
@@ -418,7 +427,6 @@ span {
 
 ol {
   margin: 0;
-  padding: 0;
 }
 
 @media (max-width: 1150px) {
@@ -440,6 +448,9 @@ ol {
   }
   .overlay {
     padding: 6%;
+  }
+  ol {
+    padding-left: 10%;
   }
 }
 /*# sourceMappingURL=styles.css.map */
